@@ -12,6 +12,7 @@ void popBubbles(std::vector<std::vector<bubble>>& bubbles, int column, int row);
 
 int main() {
 	int tries = 5;
+	int score = 0;
 
 	srand(time(0));
 	std::vector<std::vector<bubble>> bubbles;
@@ -34,7 +35,9 @@ int main() {
 
 		if (!bubbles[row - 1][columnNum - 1].getPopped()) {
 			popBubbles(bubbles, columnNum, row);
+			score += bubbles[row - 1][columnNum - 1].getValue();
 			tries--;
+			std::cout << "Score: " << score << std::endl;
 		}
 		else {
 			std::cout << "Bubble already popped! Try another one!" << std::endl;
