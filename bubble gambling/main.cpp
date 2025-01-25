@@ -11,7 +11,7 @@ void popBubbles(std::vector<std::vector<bubble>>& bubbles, int column, int row);
 
 
 int main() {
-	int tries = 5;
+	int tries = 10;
 	int score = 0;
 
 	srand(time(0));
@@ -25,10 +25,8 @@ int main() {
 		int row = 1;
 		std::cout << "Tries left: " << tries << std::endl;
 
-		std::cout << "Which column? ";
+		std::cout << "Which column & row? ";
 		std::cin >> column;
-
-		std::cout << "Which row? ";
 		std::cin >> row;
 
 		int columnNum = column - 64;
@@ -38,12 +36,15 @@ int main() {
 			score += bubbles[row - 1][columnNum - 1].getValue();
 			tries--;
 			std::cout << "Score: " << score << std::endl;
+			std::cout << std::endl;
 		}
 		else {
 			std::cout << "Bubble already popped! Try another one!" << std::endl;
 		}
 		showBubbles(bubbles);
 	} while (tries > 0);
+
+	std::cout << "Total score: " << score << std::endl;
 
 	return 0;
 }
@@ -74,9 +75,8 @@ void generateBubbles(std::vector<std::vector<bubble>>& bubbles) {
 		std::vector<bubble> tempVector;
 
 		for (int x = 'A'; x <= 'L'; x++) {
-			bubble tempBubble((char)x, y, rand() % 100 - 50);
+			bubble tempBubble((char)x, y, rand() % 100 - 25);
 			//tempBubble.setPopped(true);
-
 			tempVector.push_back(tempBubble);
 		}
 		bubbles.push_back(tempVector);
