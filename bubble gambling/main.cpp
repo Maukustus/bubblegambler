@@ -11,17 +11,36 @@ void popBubbles(std::vector<std::vector<bubble>>& bubbles, int column, int row);
 
 
 int main() {
+	int tries = 5;
+
 	srand(time(0));
-	std::vector< std::vector<bubble>> bubbles;
+	std::vector<std::vector<bubble>> bubbles;
 
 	generateBubbles(bubbles);
+	//bubbles[5][6].setPopped(true);
 	showBubbles(bubbles);
-	char column = 'A';
-	int row = 1;
+	do {
+		char column = 'A';
+		int row = 1;
+		std::cout << "Tries left: " << tries << std::endl;
 
-	int columnNum = column - 64;
+		std::cout << "Which column? ";
+		std::cin >> column;
 
-	popBubbles(bubbles, columnNum, row);
+		std::cout << "Which row? ";
+		std::cin >> row;
+
+		int columnNum = column - 64;
+
+		if (!bubbles[row - 1][columnNum - 1].getPopped()) {
+			popBubbles(bubbles, columnNum, row);
+			tries--;
+		}
+		else {
+			std::cout << "Bubble already popped! Try another one!" << std::endl;
+		}
+		showBubbles(bubbles);
+	} while (tries > 0);
 
 	return 0;
 }
@@ -62,5 +81,10 @@ void generateBubbles(std::vector<std::vector<bubble>>& bubbles) {
 }
 
 void popBubbles(std::vector<std::vector<bubble>>& bubbles, int column, int row) {
-	 
+	std::cout << "Popping bubble on: " << std::endl << "Column: " << char(column + 64) << std::endl
+		<< "Row: " << row << std::endl;
+	bubbles[row - 1][column - 1].setPopped(true);
+	
+	std::cout << std::endl;
+
 }
