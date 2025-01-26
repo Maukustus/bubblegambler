@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream& os, const bubble& b)
 		os << b.bubbleType;
 	}
 	else {
-		os << '*';
+		os << 'X';
 	}
 	return os;
 }

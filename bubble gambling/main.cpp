@@ -11,6 +11,8 @@ void popBubbles(std::vector<std::vector<bubble>>& bubbles, int column, int row);
 
 
 int main() {
+	std::cout << "Hello! Welcome to bubble gambling! We hope you have fun!\nPop a bubble from any row and column, and see if you get any points!\nPoints range from -5 to 10" << std::endl;
+	
 	int tries = 10;
 	int score = 0;
 
@@ -20,6 +22,7 @@ int main() {
 	generateBubbles(bubbles);
 	//bubbles[5][6].setPopped(true);
 	showBubbles(bubbles);
+
 	do {
 		char column = 'A';
 		int row = 1;
@@ -28,19 +31,26 @@ int main() {
 		std::cout << "Which column & row? ";
 		std::cin >> column;
 		std::cin >> row;
-
+		column = toupper(column);
 		int columnNum = column - 64;
+		
 
-		if (!bubbles[row - 1][columnNum - 1].getPopped()) {
-			popBubbles(bubbles, columnNum, row);
-			score += bubbles[row - 1][columnNum - 1].getValue();
-			tries--;
-			std::cout << "Score: " << score << std::endl;
-			std::cout << std::endl;
+		if ((columnNum > 0 && columnNum < 13) && (row > 0 && row < 9)) {
+			if (!bubbles[row - 1][columnNum - 1].getPopped()) {
+				popBubbles(bubbles, columnNum, row);
+				score += bubbles[row - 1][columnNum - 1].getValue();
+				tries--;
+				std::cout << "Score: " << score << std::endl;
+				std::cout << std::endl;
+			}
+			else {
+				std::cout << "Bubble already popped! Try another one!" << std::endl;
+			}
 		}
 		else {
-			std::cout << "Bubble already popped! Try another one!" << std::endl;
+			std::cout << "Column and/or row does not exist, try again!" << std::endl;
 		}
+		
 		showBubbles(bubbles);
 	} while (tries > 0);
 
@@ -75,7 +85,7 @@ void generateBubbles(std::vector<std::vector<bubble>>& bubbles) {
 		std::vector<bubble> tempVector;
 
 		for (int x = 'A'; x <= 'L'; x++) {
-			bubble tempBubble((char)x, y, rand() % 100 - 25);
+			bubble tempBubble((char)x, y, rand() % 16 - 5);
 			//tempBubble.setPopped(true);
 			tempVector.push_back(tempBubble);
 		}
@@ -88,6 +98,6 @@ void popBubbles(std::vector<std::vector<bubble>>& bubbles, int column, int row) 
 		<< "Row: " << row << std::endl;
 	bubbles[row - 1][column - 1].setPopped(true);
 	
-	std::cout << std::endl;
+	std::cout << "POP! Bubble's value was: " << bubbles[row - 1][column - 1].getValue() << std::endl;
 
 }
