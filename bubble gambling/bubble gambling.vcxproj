@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="bubble.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bubble.h" />
+    <ClInclude Include="player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
